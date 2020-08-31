@@ -2,15 +2,7 @@ class ParksController < ApplicationController
   def index
     state = params[:state]
 
-    conn = Faraday.new(url: "https://developer.nps.gov") do |faraday|
-      faraday.params["api_key"] = ENV["NPS-API-KEY"]
-    end
-
-    response = conn.get("/api/v1/parks?stateCode=#{state}")
-    json = JSON.parse(response.body, symbolize_names: true)
-
-    @parks = json[:data].map do |park_data|
-      Park.new(park_data)
-    end
+    park_facade = ParkFacade.new(state)
+    @parks = park_facade.find_parks
   end
 end
