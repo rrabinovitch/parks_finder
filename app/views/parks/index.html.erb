@@ -1,9 +1,11 @@
 <h1><%= @parks.size %> Results</h1>
 <% @parks.each do |park| %>
   <section class='park'>
-    <h2 class='name'><% park[:fullName] %></h2>
-    <h2 class='description'><% park[:description] %></h2>
-    <h2 class='directions'><% park[:directionsInfo] %></h2>
-    <h2 class='hours'><% park[:operatingHours] %></h2>
+    <h2 class='name'><%= park.name %></h2>
+    <ul>
+      <li class='description'><%= park.description %></li>
+      <li class='directions'><%= park.directions %></li>
+      <li class='hours'><%= park.hours %></li>
+    </ul>
   </section>
 <% end %>

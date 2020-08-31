@@ -9,6 +9,8 @@ class ParksController < ApplicationController
     response = conn.get("/api/v1/parks?stateCode=#{state}")
     json = JSON.parse(response.body, symbolize_names: true)
 
-    @parks = json[:data]
+    @parks = json[:data].map do |park_data|
+      Park.new(park_data)
+    end
   end
 end
